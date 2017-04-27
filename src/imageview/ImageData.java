@@ -1,4 +1,5 @@
 /*
+ * Data container class for the image urls and descriptions
  */
 package imageview;
 

@@ -1,5 +1,6 @@
 /*
- * 
+ * File to parse the image data from text file, 
+ * as per format described in http://bouvet.guru/rekrytering_flera.php
  */
 package imageview;
 
@@ -42,10 +43,11 @@ public class DataParser {
     }
     
     public List<ImageData> parse(URL url){
+        BufferedReader in = null;
         List<ImageData> result = new LinkedList<>();
         try {
             URLConnection connection = url.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(
+            in = new BufferedReader(new InputStreamReader(
                                     connection.getInputStream()));
             String line = in.readLine();
             while(line!=null) {
@@ -55,10 +57,15 @@ public class DataParser {
                 }
                 line = in.readLine();
             }
-            in.close();
         } catch (IOException ex) {
             Logger.getLogger(DataParser.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
         return result;
     }
 
