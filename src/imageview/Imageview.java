@@ -23,8 +23,6 @@ import javax.swing.JScrollPane;
 
 public class Imageview extends JFrame {
 
-    
-
     public Imageview() throws MalformedURLException {
         super("Image viewer");
         setSize(1200, 800);
@@ -43,14 +41,10 @@ public class Imageview extends JFrame {
         p.setSize(600, 600);
         p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 
-        System.out.println("HEJ" );
         URL url = new URL("http://bouvet.guru/rekrytering_flera.php");
         DataParser instance = new DataParser();
         List<ImageData> result = instance.parse(url);
-        System.out.println("result.size: " +result.size());
         for (ImageData id: result) {
-            System.out.println("Panel ");
-            System.out.println(id);
             JPanel imagePanel = getImagePanel(id.url, id.description);
             p.add(imagePanel);
             imagePanel.setMinimumSize(new Dimension(400, 400));
@@ -62,7 +56,6 @@ public class Imageview extends JFrame {
     }
 
     public static void main(String args[]) throws MalformedURLException {
-        System.out.println("HEJSAN");
         new Imageview();
     }
 
@@ -77,7 +70,6 @@ public class Imageview extends JFrame {
             img = ImageIO.read(url);
             double scaling = 400.0 / img.getHeight();
             
-            
             BufferedImage after = new BufferedImage((int) (scaling * img.getWidth()), 400, BufferedImage.TYPE_INT_ARGB);
             AffineTransform at = new AffineTransform();
             at.scale(scaling, scaling);
@@ -86,15 +78,12 @@ public class Imageview extends JFrame {
             img = scaleOp.filter(img, after);
             
             textLabel.setFont(new Font(null, Font.PLAIN, 30));
-            System.out.println(textLabel.getName());
             imageLabel.setIcon(new ImageIcon(img));
 
             panel.add(imageLabel, BorderLayout.CENTER);
             panel.add(textLabel, BorderLayout.SOUTH);
 
-        } catch (IOException e) {
-            System.out.println(e +" : " + url);
-        } catch (NullPointerException e) { //Some of the URLs give a nullpointer, ie http://learn-how-to-be-happy.com/wp-content/uploads/2011/08/happy_face.jpg 
+        } catch (IOException | NullPointerException e) {
             System.out.println(e +" : " + url);
         }
         return panel;

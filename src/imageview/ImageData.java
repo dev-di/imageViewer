@@ -4,8 +4,6 @@ package imageview;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Diana
@@ -31,6 +29,7 @@ public class ImageData {
                 && this.description.equals(imageData.description);
     }
     
+    @Override
     public String toString() {
         return String.format("%s %s",url.toString(), description);
     } 

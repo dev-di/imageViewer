@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Unit tests for the parser
  */
 package imageview;
 
@@ -12,8 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author Supergirl
+ * @author Diana
  */
 public class DataParserTest {
     
@@ -35,7 +32,7 @@ public class DataParserTest {
     }
 
     /**
-     * Test of parseRow method, simple correct one liner with longer comment
+     * Test of parseRow method, simple correct one liner with longer image description
      */
     @Test
     public void testParseRow2() {
@@ -76,7 +73,7 @@ public class DataParserTest {
     }
 
     /**
-     * Test of parseRow method, missing description
+     * Test of parseRow method, only url, missing description
      */
     @Test
     public void testParseRow5() {
@@ -103,7 +100,7 @@ public class DataParserTest {
     }
 
     /**
-     * Test of parse method, of class DataParser.
+     * Test of parse method with url input
      */
     @Test
     public void testParse_URL() throws MalformedURLException {
